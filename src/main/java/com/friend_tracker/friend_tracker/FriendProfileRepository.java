@@ -22,13 +22,6 @@ public interface FriendProfileRepository extends JpaRepository<FriendProfile, Lo
 
     List<FriendProfile> getAllByLastSeenBetween(LocalDate startDate, LocalDate endDate);
 
-    @Query(value = "SELECT allergies.allergy_name " +
-            "FROM profiles p " +
-            "JOIN profile_allergy pa ON p.id = pa.profile_id " +
-            "JOIN allergies a ON pa.allergy_id = a.id " +
-            "WHERE p.id = ?1", nativeQuery = true)
-    List<String> getAllProfileAllergies(Long profileId); // when allergy button is clicked on front end
-
     void deleteProfileById(long id);
 }
 
