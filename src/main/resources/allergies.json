@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "allergy_name": "Peanuts",
+    "symptoms": "Hives, swelling, anaphylaxis",
+    "precautions": "Avoid peanuts and peanut products",
+    "treatment": "Epinephrine, antihistamines"
+  },
+  {
+    "id": 2,
+    "allergy_name": "Gluten",
+    "symptoms": "Abdominal pain, bloating, diarrhea",
+    "precautions": "Avoid gluten-containing foods",
+    "treatment": "Gluten-free diet"
+  },
+  {
+    "id": 3,
+    "allergy_name": "Shellfish",
+    "symptoms": "Itching, hives, swelling, gastrointestinal symptoms",
+    "precautions": "Avoid shellfish and related products",
+    "treatment": "Antihistamines, epinephrine (for severe reactions)"
+  },
+  {
+    "id": 4,
+    "allergy_name": "Lactose",
+    "symptoms": "Abdominal cramps, bloating, diarrhea",
+    "precautions": "Avoid dairy products containing lactose",
+    "treatment": "Lactase enzyme supplements, lactose-free dairy products"
+  },
+  {
+    "id": 5,
+    "allergy_name": "Soy",
+    "symptoms": "Digestive issues, hives, swelling, difficulty breathing",
+    "precautions": "Avoid soy and soy-based products",
+    "treatment": "Antihistamines, epinephrine (for severe reactions)"
+  },
+  {
+    "id": 6,
+    "allergy_name": "Cats",
+    "symptoms": "Sneezing, runny or stuffy nose, itchy eyes, coughing, wheezing, skin rash",
+    "precautions": "Avoid contact with cats or areas where cats live",
+    "treatment": "Antihistamines, decongestants, corticosteroids"
+  },
+  {
+    "id": 7,
+    "allergy_name": "Bee Stings",
+    "symptoms": "Pain, swelling, redness, itching, hives, difficulty breathing, rapid pulse, dizziness",
+    "precautions": "Wear protective clothing outdoors, avoid areas with beehives or nests",
+    "treatment": "Remove stinger, apply ice, take antihistamines, seek medical attention if severe"
+  },
+  {
+    "id": 8,
+    "allergy_name": "Penicillin",
+    "symptoms": "Skin rash, hives, itching, fever, facial swelling, wheezing, anaphylaxis",
+    "precautions": "Avoid penicillin and related antibiotics",
+    "treatment": "Epinephrine, antihistamines, corticosteroids"
+  },
+  {
+    "id": 9,
+    "allergy_name": "Pollen",
+    "symptoms": "Sneezing, runny or stuffy nose, itchy throat, watery eyes",
+    "precautions": "Stay indoors during peak pollen times, keep windows closed, use air purifiers",
+    "treatment": "Antihistamines, decongestants, nasal sprays"
+  },
+  {
+    "id": 10,
+    "allergy_name": "Dust",
+    "symptoms": "Sneezing, runny or stuffy nose, itchy eyes, coughing, wheezing, skin rash",
+    "precautions": "Use allergen-proof covers on bedding, wash bedding regularly in hot water",
+    "treatment": "Antihistamines, decongestants, corticosteroids"
+  },
+  {
+    "id": 11,
+    "allergy_name": "Bad Vibes",
+    "symptoms": "Feeling of discomfort, unease, or anxiety",
+    "precautions": "Avoid situations or people that trigger negative feelings",
+    "treatment": "Mindfulness, stress-relief techniques, seeking support from positive influences"
+  },
+  {
+    "id": 12,
+    "allergy_name": "Dairy",
+    "symptoms": "Digestive issues, bloating, diarrhea, skin rash",
+    "precautions": "Avoid dairy products",
+    "treatment": "Dairy-free diet, lactase enzyme supplements"
+  }
+]

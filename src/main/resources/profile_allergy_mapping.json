@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "profile_id": 1,
+    "allergy_id": 1
+  },
+  {
+    "id": 2,
+    "profile_id": 2,
+    "allergy_id": 1
+  },
+  {
+    "id": 3,
+    "profile_id": 2,
+    "allergy_id": 3
+  },
+  {
+    "id": 4,
+    "profile_id": 2,
+    "allergy_id": 6
+  },
+  {
+    "id": 5,
+    "profile_id": 3,
+    "allergy_id": 2
+  },
+  {
+    "id": 6,
+    "profile_id": 3,
+    "allergy_id": 3
+  },
+  {
+    "id": 7,
+    "profile_id": 3,
+    "allergy_id": 6
+  },
+  {
+    "id": 8,
+    "profile_id": 3,
+    "allergy_id": 9
+  },
+  {
+    "id": 9,
+    "profile_id": 4,
+    "allergy_id": 1
+  },
+  {
+    "id": 10,
+    "profile_id": 5,
+    "allergy_id": 6
+  },
+  {
+    "id": 11,
+    "profile_id": 5,
+    "allergy_id": 10
+  },
+  {
+    "id": 12,
+    "profile_id": 6,
+    "allergy_id": 3
+  },
+  {
+    "id": 13,
+    "profile_id": 9,
+    "allergy_id": 7
+  },
+  {
+    "id": 14,
+    "profile_id": 10,
+    "allergy_id": 8
+  },
+  {
+    "id": 15,
+    "profile_id": 11,
+    "allergy_id": 1
+  },
+  {
+    "id": 16,
+    "profile_id": 12,
+    "allergy_id": 2
+  },
+  {
+    "id": 17,
+    "profile_id": 13,
+    "allergy_id": 9
+  },
+  {
+    "id": 18,
+    "profile_id": 14,
+    "allergy_id": 10
+  },
+  {
+    "id": 19,
+    "profile_id": 15,
+    "allergy_id": 5
+  },
+  {
+    "id": 20,
+    "profile_id": 16,
+    "allergy_id": 7
+  },
+  {
+    "id": 21,
+    "profile_id": 16,
+    "allergy_id": 8
+  },
+  {
+    "id": 22,
+    "profile_id": 16,
+    "allergy_id": 11
+  },
+  {
+    "id": 23,
+    "profile_id": 17,
+    "allergy_id": 8
+  },
+  {
+    "id": 24,
+    "profile_id": 18,
+    "allergy_id": 9
+  },
+  {
+    "id": 25,
+    "profile_id": 18,
+    "allergy_id": 6
+  },
+  {
+    "id": 26,
+    "profile_id": 19,
+    "allergy_id": 10
+  },
+  {
+    "id": 27,
+    "profile_id": 20,
+    "allergy_id": 1
+  },
+  {
+    "id": 28,
+    "profile_id": 21,
+    "allergy_id": 2
+  },
+  {
+    "id": 29,
+    "profile_id": 22,
+    "allergy_id": 3
+  },
+  {
+    "id": 30,
+    "profile_id": 23,
+    "allergy_id": 5
+  }
+]
