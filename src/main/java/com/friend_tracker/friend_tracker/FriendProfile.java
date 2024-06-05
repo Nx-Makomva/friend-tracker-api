@@ -2,6 +2,8 @@ package com.friend_tracker.friend_tracker;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "profile")
 public class FriendProfile {
@@ -10,11 +12,11 @@ public class FriendProfile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    private String birthdayStr;
-    private String numOfSiblingsStr;
+    private LocalDate birthday;
+    private int numOfSiblings;
     private String occupation;
     private String heritage;
-    private String lastSeenStr;
+    private LocalDate lastSeenStr;
 
 
 
@@ -22,11 +24,11 @@ public class FriendProfile {
 
     }
 
-    public FriendProfile(long id, String name, String birthdayStr, String numOfSiblingsStr, String occupation, String heritage, String lastSeenStr) {
+    public FriendProfile(long id, String name, LocalDate birthday, int numOfSiblings, String occupation, String heritage, LocalDate lastSeenStr) {
         this.id = id;
         this.name = name;
-        this.birthdayStr = birthdayStr;
-        this.numOfSiblingsStr = numOfSiblingsStr;
+        this.birthday = birthday;
+        this.numOfSiblings = numOfSiblings;
         this.occupation = occupation;
         this.lastSeenStr = lastSeenStr;
         this.heritage = heritage;
@@ -48,20 +50,20 @@ public class FriendProfile {
         this.name = name;
     }
 
-    public String getBirthdayStr() {
-        return birthdayStr;
+    public LocalDate getBirthday() {
+        return birthday;
     }
 
-    public void setBirthdayStr(String birthdayStr) {
-        this.birthdayStr = birthdayStr;
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
     }
 
-    public String getNumOfSiblingsStr() {
-        return numOfSiblingsStr;
+    public int getNumOfSiblings() {
+        return numOfSiblings;
     }
 
-    public void setNumOfSiblingsStr(String numOfSiblingsStr) {
-        this.numOfSiblingsStr = numOfSiblingsStr;
+    public void setNumOfSiblings(int numOfSiblings) {
+        this.numOfSiblings = numOfSiblings;
     }
 
     public String getOccupation() {
@@ -72,11 +74,11 @@ public class FriendProfile {
         this.occupation = occupation;
     }
 
-    public String getLastSeenStr() {
+    public LocalDate getLastSeenStr() {
         return lastSeenStr;
     }
 
-    public void setLastSeenStr(String lastSeenStr) {
+    public void setLastSeenStr(LocalDate lastSeenStr) {
         this.lastSeenStr = lastSeenStr;
     }
 
