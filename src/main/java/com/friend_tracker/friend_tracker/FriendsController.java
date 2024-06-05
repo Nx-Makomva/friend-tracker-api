@@ -15,16 +15,16 @@ import java.util.List;
 public class FriendsController {
 
     @Autowired
-    FriendsService friendsService ;
+    FriendProfileService friendProfileService;
 
     @GetMapping("/allergies")
     public ResponseEntity<List<FriendProfile>> getAllergies(@RequestParam(required = false) String allergies, @RequestParam(defaultValue = "10") int limit) {
 
         if (allergies != null) {
-            return ResponseEntity.status(HttpStatus.OK).body(friendsService.getAllByHeritage(allergies, limit));
+            return ResponseEntity.status(HttpStatus.OK).body(friendProfileService.getAllByHeritage(allergies, limit));
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(friendsService.getAllAllergies(limit)) ;
+        return ResponseEntity.status(HttpStatus.OK).body(friendProfileService.getAllAllergies(limit)) ;
 
     }
 }

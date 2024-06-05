@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class FriendsService {
+public class FriendProfileService {
 
     @Autowired
-    FriendsRepository friendsRepository;
+    FriendProfileRepository friendProfileRepository;
 
     public List<FriendProfile> getAllAllergies(int limit) {
-        return friendsRepository
+        return friendProfileRepository
                 .findAll()
                 .stream()
                 .limit(limit)
@@ -22,7 +22,7 @@ public class FriendsService {
     }
 
     public List<FriendProfile> getAllByHeritage(String heritage, int limit) {
-        List<FriendProfile> profiles = friendsRepository.getAllByHeritage(heritage);
+        List<FriendProfile> profiles = friendProfileRepository.getAllByHeritage(heritage);
 
         return profiles
                 .stream()

@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface FriendsRepository extends JpaRepository<FriendProfile, Long> {
+public interface FriendProfileRepository extends JpaRepository<FriendProfile, Long> {
 
     FriendProfile getById(long id);
 
@@ -18,9 +18,9 @@ public interface FriendsRepository extends JpaRepository<FriendProfile, Long> {
 
     List<FriendProfile> getAllByOccupation(String occupation);
 
-    List<FriendProfile> getAllByHeritage(String allergy);
+    List<FriendProfile> getAllByHeritage(String heritage);
 
-    List<FriendProfile> getAllByLastSeen(LocalDate lastSeen);
+    List<FriendProfile> getAllByLastSeenBetween(LocalDate startDate, LocalDate endDate);
 
     @Query(value = "SELECT allergies.allergy_name " +
             "FROM profiles p " +
