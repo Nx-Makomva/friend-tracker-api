@@ -1,5 +1,9 @@
 package com.friend_tracker.friend_tracker;
 
+import com.friend_tracker.friend_tracker.Allergy.Allergy;
+import com.friend_tracker.friend_tracker.Allergy.AllergyService;
+import com.friend_tracker.friend_tracker.Profile.Profile;
+import com.friend_tracker.friend_tracker.Profile.ProfileService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,9 +18,9 @@ import java.util.List;
 public class FriendsController {
 
     @Autowired
-    FriendProfileService friendProfileService;
+    ProfileService profileService;
     @Autowired
-    FriendAllergyService friendAllergyService;
+    AllergyService allergyService;
 //    @Autowired
 //    FriendProfileAllergyMapping friendProfileAllergyMapping;
 
@@ -29,8 +33,8 @@ public class FriendsController {
     // PROFILES
 
     @PostMapping("/profile")
-    public ResponseEntity<FriendProfile> createProfile(@RequestBody FriendProfile profile) {
-        friendProfileService.addProfile(profile);
+    public ResponseEntity<Profile> createProfile(@RequestBody Profile profile) {
+        profileService.addProfile(profile);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(profile);
     }
@@ -38,8 +42,8 @@ public class FriendsController {
     // ALLERGIES
 
     @PostMapping("/allergy")
-    public ResponseEntity<FriendAllergy> createAllergy(@RequestBody FriendAllergy allergy) {
-//        friendAllergyService.addAllergy(allergy);
+    public ResponseEntity<Allergy> createAllergy(@RequestBody Allergy allergy) {
+//        allergyService.addAllergy(allergy);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(allergy);
     }
@@ -49,75 +53,75 @@ public class FriendsController {
 
     // PROFILES
     @GetMapping("/profiles")
-    public ResponseEntity<List<FriendProfile>> getProfile(@RequestParam(required = false) String profileName,
-                                                           @RequestParam(defaultValue = "15") int limit) {
+    public ResponseEntity<List<Profile>> getProfile(@RequestParam(required = false) String profileName,
+                                                    @RequestParam(defaultValue = "15") int limit) {
 
         if (profileName != null) {
-           return ResponseEntity.status(HttpStatus.OK).body(friendProfileService.getByName(profileName));
+           return ResponseEntity.status(HttpStatus.OK).body(profileService.getByName(profileName));
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(friendProfileService.getAllProfiles(limit));
+        return ResponseEntity.status(HttpStatus.OK).body(profileService.getAllProfiles(limit));
     }
 
     @GetMapping("profiles/birthday")
-    public ResponseEntity<List<FriendProfile>> getBirthdaysBetween(@RequestParam(required = false) LocalDate startDate, LocalDate endDate,
+    public ResponseEntity<List<Profile>> getBirthdaysBetween(@RequestParam(required = false) LocalDate startDate, LocalDate endDate,
                                                              @RequestParam(defaultValue = "15") int limit ) {
         if (startDate != null && endDate != null) {
-            return ResponseEntity.status(HttpStatus.OK).body(friendProfileService.getByBirthdayBetween(startDate, endDate));
+            return ResponseEntity.status(HttpStatus.OK).body(profileService.getByBirthdayBetween(startDate, endDate));
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(friendProfileService.getAllBirthday(limit));
+        return ResponseEntity.status(HttpStatus.OK).body(profileService.getAllBirthday(limit));
     }
 
     @GetMapping("profiles/occupation")
-    public ResponseEntity<List<FriendProfile>> getOccupation(@RequestParam(required = false) String occupation,
-                                                                   @RequestParam(defaultValue = "25") int limit ) {
+    public ResponseEntity<List<Profile>> getOccupation(@RequestParam(required = false) String occupation,
+                                                       @RequestParam(defaultValue = "25") int limit ) {
         if (occupation != null) {
-            return ResponseEntity.status(HttpStatus.OK).body(friendProfileService.getByOccupation(occupation));
+            return ResponseEntity.status(HttpStatus.OK).body(profileService.getByOccupation(occupation));
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(friendProfileService.getAllOccupation(limit));
+        return ResponseEntity.status(HttpStatus.OK).body(profileService.getAllOccupation(limit));
     }
 
 
     @GetMapping("profiles/heritage")
-    public ResponseEntity<List<FriendProfile>> getHeritage(@RequestParam(required = false) String heritage,
-                                                             @RequestParam(defaultValue = "25") int limit ) {
+    public ResponseEntity<List<Profile>> getHeritage(@RequestParam(required = false) String heritage,
+                                                     @RequestParam(defaultValue = "25") int limit ) {
         if (heritage != null) {
-            return ResponseEntity.status(HttpStatus.OK).body(friendProfileService.getByHeritage(heritage, limit));
+            return ResponseEntity.status(HttpStatus.OK).body(profileService.getByHeritage(heritage, limit));
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(friendProfileService.getAllHeritage(limit));
+        return ResponseEntity.status(HttpStatus.OK).body(profileService.getAllHeritage(limit));
     }
 
 
     @GetMapping("profiles/last-seen")
-    public ResponseEntity<List<FriendProfile>> getLastSeen(@RequestParam(required = false) LocalDate startDate, LocalDate endDate,
-                                                                   @RequestParam(defaultValue = "25") int limit ) {
+    public ResponseEntity<List<Profile>> getLastSeen(@RequestParam(required = false) LocalDate startDate, LocalDate endDate,
+                                                     @RequestParam(defaultValue = "25") int limit ) {
         if (startDate != null && endDate != null) {
-            return ResponseEntity.status(HttpStatus.OK).body(friendProfileService.getByLastSeenBetween(startDate, endDate));
+            return ResponseEntity.status(HttpStatus.OK).body(profileService.getByLastSeenBetween(startDate, endDate));
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(friendProfileService.getAllLastSeen(limit));
+        return ResponseEntity.status(HttpStatus.OK).body(profileService.getAllLastSeen(limit));
     }
 
     @GetMapping("/profile{id}")
-    public ResponseEntity<FriendProfile> getProfileById(@RequestParam long id) {
+    public ResponseEntity<Profile> getProfileById(@RequestParam long id) {
 
-        return ResponseEntity.status(HttpStatus.OK).body(friendProfileService.getProfileById(id));
+        return ResponseEntity.status(HttpStatus.OK).body(profileService.getProfileById(id));
     }
 
     // ALLERGIES
 
     @GetMapping("/allergies")
-    public ResponseEntity<List<FriendAllergy>> getAllergy(@RequestParam(required = false) String allergy,
-                                                            @RequestParam(defaultValue = "12") int limit) {
+    public ResponseEntity<List<Allergy>> getAllergy(@RequestParam(required = false) String allergy,
+                                                    @RequestParam(defaultValue = "12") int limit) {
 
         if (allergy != null) {
-            return ResponseEntity.status(HttpStatus.OK).body(friendAllergyService.getByAllergyName(allergy, limit));
+            return ResponseEntity.status(HttpStatus.OK).body(allergyService.getByAllergyName(allergy, limit));
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(friendAllergyService.getAllAllergies(limit)) ;
+        return ResponseEntity.status(HttpStatus.OK).body(allergyService.getAllAllergies(limit)) ;
 
     }
 
@@ -128,10 +132,10 @@ public class FriendsController {
 
     @PutMapping("/profile/{id}")
     @Transactional
-    public ResponseEntity<FriendProfile> updateProfile(@RequestBody FriendProfile newProfile,
-                                                       @PathVariable long id) {
+    public ResponseEntity<Profile> updateProfile(@RequestBody Profile newProfile,
+                                                 @PathVariable long id) {
         newProfile.setId(id);
-        friendProfileService.updateProfile(newProfile, id);
+        profileService.updateProfile(newProfile, id);
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(newProfile);
     }
@@ -147,7 +151,7 @@ public class FriendsController {
     @DeleteMapping("/profile/{id}")
     @Transactional
     public ResponseEntity<String> deleteProfileById(@PathVariable long id) {
-        friendProfileService.deleteProfileById(id);
+        profileService.deleteProfileById(id);
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Profile with id: " + id + " has been deleted");
     }

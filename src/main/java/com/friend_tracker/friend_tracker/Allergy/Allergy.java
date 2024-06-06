@@ -1,10 +1,10 @@
-package com.friend_tracker.friend_tracker;
+package com.friend_tracker.friend_tracker.Allergy;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "allergies")
-public class FriendAllergy {
+public class Allergy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,10 +14,10 @@ public class FriendAllergy {
     private String precautions;
     private String treatment;
 
-    public FriendAllergy() {
+    public Allergy() {
     }
 
-    public FriendAllergy(long id, long profileId, String allergyName, String symptoms, String precautions, String treatment) {
+    public Allergy(long id, long profileId, String allergyName, String symptoms, String precautions, String treatment) {
         this.id = id;
         this.allergyName = allergyName;
         this.symptoms = symptoms;

@@ -1,11 +1,11 @@
-package com.friend_tracker.friend_tracker;
+package com.friend_tracker.friend_tracker.Profile;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "profile")
-public class FriendProfile {
+public class Profile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,11 +19,11 @@ public class FriendProfile {
 
 
 
-    public FriendProfile() {
+    public Profile() {
 
     }
 
-    public FriendProfile(long id, String name, LocalDate birthday, int numOfSiblings, String occupation, String heritage, LocalDate lastSeen) {
+    public Profile(long id, String name, LocalDate birthday, int numOfSiblings, String occupation, String heritage, LocalDate lastSeen) {
         this.id = id;
         this.name = name;
         this.birthday = birthday;

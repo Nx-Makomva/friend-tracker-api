@@ -1,5 +1,6 @@
-package com.friend_tracker.friend_tracker;
+package com.friend_tracker.friend_tracker.Allergy;
 
+import com.friend_tracker.friend_tracker.FriendNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,20 +11,20 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class FriendAllergyService {
+public class AllergyService {
 
     @Autowired
-    FriendAllergyRepository friendAllergyRepository;
+    AllergyRepository allergyRepository;
 
     // CREATE
 
-    public void addAllergy(FriendAllergy allergy) {
-        friendAllergyRepository.save(allergy);
+    public void addAllergy(Allergy allergy) {
+        allergyRepository.save(allergy);
     }
 
     // READ
-    public FriendAllergy getAllergyById(long id) {
-        Optional<FriendAllergy> allergy = friendAllergyRepository.findById(id);
+    public Allergy getAllergyById(long id) {
+        Optional<Allergy> allergy = allergyRepository.findById(id);
 
         if (allergy.isEmpty()) {
             throw new FriendNotFoundException("Allergy could not be found");
@@ -32,17 +33,17 @@ public class FriendAllergyService {
         return allergy.get();
     }
 
-    public List<FriendAllergy> getAllAllergies(int limit) {
-        return friendAllergyRepository
+    public List<Allergy> getAllAllergies(int limit) {
+        return allergyRepository
                 .findAll()
                 .stream()
                 .limit(limit)
-                .sorted(Comparator.comparing(FriendAllergy::getAllergyName))
+                .sorted(Comparator.comparing(Allergy::getAllergyName))
                 .collect(Collectors.toList());
     }
 
-    public List<FriendAllergy> getByAllergyName(String allergy, int limit) {
-        List<FriendAllergy> allergies = friendAllergyRepository.getAllByAllergyName(allergy);
+    public List<Allergy> getByAllergyName(String allergy, int limit) {
+        List<Allergy> allergies = allergyRepository.getAllByAllergyName(allergy);
 
         return allergies
                 .stream()
@@ -51,32 +52,32 @@ public class FriendAllergyService {
 
     }
 
-    public List<FriendAllergy> getBySymptoms(String symptom) {
-        return friendAllergyRepository.getAllBySymptomsContaining(symptom);
+    public List<Allergy> getBySymptoms(String symptom) {
+        return allergyRepository.getAllBySymptomsContaining(symptom);
     }
 
 
     // UPDATE
 
     @Transactional
-    public void updateAllergy(FriendAllergy newAllergy, long id) {
-        if (!friendAllergyRepository.existsById(id)) {
+    public void updateAllergy(Allergy newAllergy, long id) {
+        if (!allergyRepository.existsById(id)) {
             throw new FriendNotFoundException("Allergy not found: Cannot update Allergy.");
         }
 
         newAllergy.setId(id);
-        friendAllergyRepository.save(newAllergy);
+        allergyRepository.save(newAllergy);
     }
 
     // DELETE
 
     @Transactional
     public void deleteAllergy(long id) {
-        if (!friendAllergyRepository.existsById(id)) {
+        if (!allergyRepository.existsById(id)) {
             throw new FriendNotFoundException("Allergy not found: Cannot delete Allergy.");
         }
 
-        friendAllergyRepository.deleteAllergyById(id);
+        allergyRepository.deleteAllergyById(id);
     }
 
 }

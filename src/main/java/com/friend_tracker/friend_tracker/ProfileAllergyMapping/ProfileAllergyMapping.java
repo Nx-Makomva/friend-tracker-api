@@ -1,10 +1,10 @@
-package com.friend_tracker.friend_tracker;
+package com.friend_tracker.friend_tracker.ProfileAllergyMapping;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "profile_allergy_mapping")
-public class FriendProfileAllergyMapping {
+public class ProfileAllergyMapping {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,11 +12,11 @@ public class FriendProfileAllergyMapping {
     private long profileId;
     private long allergyId;
 
-    public FriendProfileAllergyMapping(){
+    public ProfileAllergyMapping(){
 
     }
 
-    public FriendProfileAllergyMapping(long id, long profileId, long allergyId) {
+    public ProfileAllergyMapping(long id, long profileId, long allergyId) {
         this.id = id;
         this.profileId = profileId;
         this.allergyId = allergyId;
