@@ -146,7 +146,42 @@
   },
   {
     "id": 30,
-    "profile_id": 23,
+    "profile_id": 38,
     "allergy_id": 5
+  },
+  {
+    "id": 31,
+    "profile_id": 40,
+    "allergy_id": 3
+  },
+  {
+    "id": 32,
+    "profile_id": 45,
+    "allergy_id": 9
+  },
+  {
+    "id": 33,
+    "profile_id": 50,
+    "allergy_id": 12
+  },
+  {
+    "id": 34,
+    "profile_id": 50,
+    "allergy_id": 11
+  },
+  {
+    "id": 35,
+    "profile_id": 51,
+    "allergy_id": 8
+ },
+  {
+    "id": 36,
+    "profile_id": 57,
+    "allergy_id": 7
+  },
+  {
+    "id": 31,
+    "profile_id": 57,
+    "allergy_id": 11
   }
 ]
