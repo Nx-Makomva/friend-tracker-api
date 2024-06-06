@@ -45,15 +45,6 @@ public class FriendProfileService {
         return friendProfileRepository.getAllByName(profileName);
     }
 
-    public List<FriendProfile> getAllAllergies(int limit) {
-        return friendProfileRepository
-                .findAll()
-                .stream()
-                .limit(limit)
-                .collect(Collectors.toList());
-
-    }
-
     public List<FriendProfile> getAllByHeritage(String heritage, int limit) {
         List<FriendProfile> profiles = friendProfileRepository.getAllByHeritage(heritage);
 
