@@ -4,6 +4,8 @@ import com.friend_tracker.friend_tracker.Allergy.Allergy;
 import com.friend_tracker.friend_tracker.Allergy.AllergyService;
 import com.friend_tracker.friend_tracker.Profile.Profile;
 import com.friend_tracker.friend_tracker.Profile.ProfileService;
+import com.friend_tracker.friend_tracker.ProfileAllergyMapping.ProfileAllergyMapping;
+import com.friend_tracker.friend_tracker.ProfileAllergyMapping.ProfileAllergyMappingService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,8 +23,8 @@ public class FriendsController {
     ProfileService profileService;
     @Autowired
     AllergyService allergyService;
-//    @Autowired
-//    FriendProfileAllergyMapping friendProfileAllergyMapping;
+    @Autowired
+    ProfileAllergyMappingService profileAllergyMappingService;
 
     @ExceptionHandler
     public ResponseEntity<String> handleExceptions(FriendNotFoundException exception) {
@@ -31,7 +33,6 @@ public class FriendsController {
     // CREATE
 
     // PROFILES
-
     @PostMapping("/profile")
     public ResponseEntity<Profile> createProfile(@RequestBody Profile profile) {
         profileService.addProfile(profile);
@@ -40,12 +41,19 @@ public class FriendsController {
     }
 
     // ALLERGIES
-
     @PostMapping("/allergy")
     public ResponseEntity<Allergy> createAllergy(@RequestBody Allergy allergy) {
         allergyService.addAllergy(allergy);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(allergy);
+    }
+
+    // PROFILE-ALLERGY RELATIONSHIP
+    @PostMapping("/profile-allergy")
+    public ResponseEntity<ProfileAllergyMapping> createProfileAllergyRelationship(@RequestBody ProfileAllergyMapping profileAllergy) {
+        profileAllergyMappingService.addProfileAllergyRelationship(profileAllergy);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(profileAllergy);
     }
 
 
@@ -105,14 +113,18 @@ public class FriendsController {
         return ResponseEntity.status(HttpStatus.OK).body(profileService.getAllLastSeen(limit));
     }
 
-    @GetMapping("/profile{id}")
+    @GetMapping("/profile/{id}")
     public ResponseEntity<Profile> getProfileById(@PathVariable long id) {
 
         return ResponseEntity.status(HttpStatus.OK).body(profileService.getProfileById(id));
     }
 
-    // ALLERGIES
+    @GetMapping("/profile/{id}/allergies")
+    public ResponseEntity<List<String>> getProfileAllergies(@PathVariable long id) {
+        return  ResponseEntity.status(HttpStatus.OK).body(profileAllergyMappingService.getProfileAllergies(id));
+    }
 
+    // ALLERGIES
     @GetMapping("/allergies")
     public ResponseEntity<List<Allergy>> getAllergy(@RequestParam(required = false) String allergy,
                                                     @RequestParam(defaultValue = "12") int limit) {
@@ -121,7 +133,7 @@ public class FriendsController {
             return ResponseEntity.status(HttpStatus.OK).body(allergyService.getByAllergyName(allergy, limit));
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(allergyService.getAllAllergies(limit)) ;
+        return ResponseEntity.status(HttpStatus.OK).body(allergyService.getAllAllergies(limit));
 
     }
 
@@ -136,16 +148,25 @@ public class FriendsController {
     }
 
 
-    @GetMapping("/allergy{id}")
+    @GetMapping("/allergy/{id}")
     public ResponseEntity<Allergy> getAllergyById(@PathVariable long id) {
         return ResponseEntity.status(HttpStatus.OK).body(allergyService.getAllergyById(id));
     }
 
+    // PROFILE-ALLERGY RELATIONSHIP
+
+    @GetMapping("/profile-allergies")
+    public ResponseEntity<List<Profile>> getProfileAllergy(@RequestParam(required = false) Long allergyId) {
+        if (allergyId !=null) {
+            return  ResponseEntity.status(HttpStatus.OK).body(profileAllergyMappingService.getProfilesByAllergyId(allergyId));
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(profileAllergyMappingService.getAllProfilesWithAllergies());
+    }
 
     // UPDATE
 
     // PROFILES
-
     @PutMapping("/profile/{id}")
     @Transactional
     public ResponseEntity<Profile> updateProfile(@RequestBody Profile newProfile,
@@ -157,7 +178,6 @@ public class FriendsController {
     }
 
     // ALLERGIES
-
     @PutMapping("/allergy/{id}")
     @Transactional
     public ResponseEntity<Allergy> updateAllergy(@RequestBody Allergy newAllergy, @PathVariable long id) {
@@ -168,10 +188,21 @@ public class FriendsController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(newAllergy);
     }
 
+    // PROFILE-ALLERGY RELATIONSHIP
+    @PutMapping("/profile-allergy/{id}")
+    @Transactional
+    public ResponseEntity<ProfileAllergyMapping> updateProfileAllergyRelationship(@RequestBody ProfileAllergyMapping newProfileAllergy, @PathVariable long id) {
+
+        newProfileAllergy.setId(id);
+        profileAllergyMappingService.updateProfileAllergyRelationship(newProfileAllergy, id);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(newProfileAllergy);
+    }
+
+
     // DELETE
 
     // PROFILES
-
     @DeleteMapping("/profile/{id}")
     @Transactional
     public ResponseEntity<String> deleteProfileById(@PathVariable long id) {
@@ -181,11 +212,18 @@ public class FriendsController {
     }
 
     // ALLERGIES
-
     @DeleteMapping("/allergy/{id}")
     public ResponseEntity<String> deleteAllergy(@PathVariable long id) {
         allergyService.deleteAllergy(id);
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Allergy with id: " + id + " has been deleted");
+    }
+
+    // PROFILE-ALLERGY RELATIONSHIP
+    @DeleteMapping("/profile-allergy/{id}")
+    public ResponseEntity<String> deleteProfileAllergyRelationship(@PathVariable long id) {
+        profileAllergyMappingService.deleteProfileAllergyRelationship(id);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Profile - Allergy relationship with id: " + id + " has been deleted");
     }
 }

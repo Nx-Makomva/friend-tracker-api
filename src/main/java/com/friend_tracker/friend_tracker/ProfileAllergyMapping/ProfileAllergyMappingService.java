@@ -28,20 +28,6 @@ public class ProfileAllergyMappingService {
 
 
     // READ
-    public List<String> getProfileAllergies(long id) {
-       return profileAllergyMappingRepository.getAllProfileAllergies(id);
-    }
-
-    public List<Profile> getProfilesByAllergyId(long allergyId) {
-        List<ProfileAllergyMapping> profileAllergyMapping = profileAllergyMappingRepository.getAllByAllergyId(allergyId);
-
-        List<Long> profileIds = profileAllergyMapping
-                .stream()
-                .map(ProfileAllergyMapping::getProfileId)
-                .toList();
-
-        return profileRepository.findAllById(profileIds);
-    }
 
     public List<Profile> getAllProfilesWithAllergies() {
         List<ProfileAllergyMapping> profileAllergyMapping = profileAllergyMappingRepository.findAll();
@@ -54,15 +40,32 @@ public class ProfileAllergyMappingService {
         return profileRepository.findAllById(profileIds);
     }
 
+
+    public List<String> getProfileAllergies(long id) {
+       return profileAllergyMappingRepository.getAllProfileAllergies(id);
+    }
+
+
+    public List<Profile> getProfilesByAllergyId(long allergyId) {
+        List<ProfileAllergyMapping> profileAllergyMapping = profileAllergyMappingRepository.getAllByAllergyId(allergyId);
+
+        List<Long> profileIds = profileAllergyMapping
+                .stream()
+                .map(ProfileAllergyMapping::getProfileId)
+                .toList();
+
+        return profileRepository.findAllById(profileIds);
+    }
+
     // UPDATE
     @Transactional
-    public void updateProfileAllergyRelationship(ProfileAllergyMapping newRelationship, long id) {
+    public void updateProfileAllergyRelationship(ProfileAllergyMapping newProfileAllergy, long id) {
         if (!profileAllergyMappingRepository.existsById(id)) {
             throw new FriendNotFoundException("Profile - Allergy relationship not found: Unable to update allergy for this Profile");
         }
 
-        newRelationship.setId(id);
-        profileAllergyMappingRepository.save(newRelationship);
+        newProfileAllergy.setId(id);
+        profileAllergyMappingRepository.save(newProfileAllergy);
     }
 
 
