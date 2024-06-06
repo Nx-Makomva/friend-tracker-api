@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,7 +32,7 @@ public class FriendProfileService {
                 .collect(Collectors.toList());
     }
 
-    public FriendProfile getById(long id) {
+    public FriendProfile getProfileById(long id) {
        Optional<FriendProfile> profile = friendProfileRepository.findById(id);
 
        if (profile.isEmpty()) {
@@ -46,21 +47,58 @@ public class FriendProfileService {
         return friendProfileRepository.getAllByName(profileName);
     }
 
+    public List<FriendProfile> getAllBirthday(int limit) {
+        return friendProfileRepository
+                .findAll()
+                .stream()
+                .limit(limit)
+                .sorted(Comparator.comparing((FriendProfile profile) -> profile.getBirthday().getMonth())
+                        .thenComparing(FriendProfile::getBirthday))
+                .collect(Collectors.toList());
+    }
+
     public List<FriendProfile> getByBirthdayBetween(LocalDate startDate, LocalDate endDate) {
         return friendProfileRepository.getAllByBirthdayBetween(startDate, endDate);
+    }
+
+
+    public List<FriendProfile> getAllOccupation(int limit) {
+        return friendProfileRepository
+                .findAll()
+                .stream()
+                .limit(limit)
+                .sorted(Comparator.comparing(FriendProfile::getOccupation))
+                .collect(Collectors.toList());
     }
 
     public List<FriendProfile> getByOccupation(String occupation) {
         return friendProfileRepository.getAllByOccupation(occupation);
     }
 
+    public List<FriendProfile> getAllHeritage(int limit) {
+        return friendProfileRepository
+                .findAll()
+                .stream()
+                .limit(limit)
+                .sorted(Comparator.comparing(FriendProfile::getHeritage))
+                .collect(Collectors.toList());
+    }
 
-    public List<FriendProfile> getAllByHeritage(String heritage, int limit) {
+    public List<FriendProfile> getByHeritage(String heritage, int limit) {
         List<FriendProfile> profiles = friendProfileRepository.getAllByHeritage(heritage);
 
         return profiles
                 .stream()
                 .limit(limit)
+                .collect(Collectors.toList());
+    }
+
+    public List<FriendProfile> getAllLastSeen(int limit) {
+        return friendProfileRepository
+                .findAll()
+                .stream()
+                .limit(limit)
+                .sorted(Comparator.comparing(FriendProfile::getLastSeen))
                 .collect(Collectors.toList());
     }
 
