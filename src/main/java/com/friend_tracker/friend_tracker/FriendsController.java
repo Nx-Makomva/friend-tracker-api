@@ -164,6 +164,7 @@ public class FriendsController {
         return ResponseEntity.status(HttpStatus.OK).body(profileAllergyMappingService.getAllProfilesWithAllergies());
     }
 
+
     // UPDATE
 
     // PROFILES
