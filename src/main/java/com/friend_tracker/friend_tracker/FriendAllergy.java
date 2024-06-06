@@ -3,7 +3,7 @@ package com.friend_tracker.friend_tracker;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "symptoms")
+@Table(name = "allergies")
 public class FriendAllergy {
 
     @Id

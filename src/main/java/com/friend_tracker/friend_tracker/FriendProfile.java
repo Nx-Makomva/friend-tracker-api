@@ -1,7 +1,6 @@
 package com.friend_tracker.friend_tracker;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 
 @Entity
@@ -16,7 +15,7 @@ public class FriendProfile {
     private int numOfSiblings;
     private String occupation;
     private String heritage;
-    private LocalDate lastSeenStr;
+    private LocalDate lastSeen;
 
 
 
@@ -24,13 +23,13 @@ public class FriendProfile {
 
     }
 
-    public FriendProfile(long id, String name, LocalDate birthday, int numOfSiblings, String occupation, String heritage, LocalDate lastSeenStr) {
+    public FriendProfile(long id, String name, LocalDate birthday, int numOfSiblings, String occupation, String heritage, LocalDate lastSeen) {
         this.id = id;
         this.name = name;
         this.birthday = birthday;
         this.numOfSiblings = numOfSiblings;
         this.occupation = occupation;
-        this.lastSeenStr = lastSeenStr;
+        this.lastSeen = lastSeen;
         this.heritage = heritage;
     }
 
@@ -74,12 +73,12 @@ public class FriendProfile {
         this.occupation = occupation;
     }
 
-    public LocalDate getLastSeenStr() {
-        return lastSeenStr;
+    public LocalDate getLastSeen() {
+        return lastSeen;
     }
 
-    public void setLastSeenStr(LocalDate lastSeenStr) {
-        this.lastSeenStr = lastSeenStr;
+    public void setLastSeen(LocalDate lastSeen) {
+        this.lastSeen = lastSeen;
     }
 
     public String getHeritage() {

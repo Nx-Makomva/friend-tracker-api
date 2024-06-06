@@ -10,8 +10,6 @@ import java.util.List;
 @Repository
 public interface FriendProfileRepository extends JpaRepository<FriendProfile, Long> {
 
-    FriendProfile getById(long id);
-
     List<FriendProfile> getAllByName(String name);
 
     List<FriendProfile> getAllByBirthdayBetween(LocalDate startDate, LocalDate endDate);

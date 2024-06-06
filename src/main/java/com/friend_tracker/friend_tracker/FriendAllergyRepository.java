@@ -10,13 +10,13 @@ public interface FriendAllergyRepository extends JpaRepository<FriendAllergy, Lo
 
     FriendAllergy getById(long id);
 
-    List<FriendAllergy> getAllByName(String name);
+    List<FriendAllergy> getAllByAllergyName(String name);
 
-    List<FriendAllergy> getAllByOrderByNameAsc();
+    List<FriendAllergy> getAllByOrderByAllergyNameAsc();
 
     List<FriendAllergy> getAllBySymptomsContaining(String symptom);
 
-    int countAll();
+    // int countAll(); // - spring couldn't figure this one out and so did not auto create it
 
     void deleteAllergyById(long id);
 }
