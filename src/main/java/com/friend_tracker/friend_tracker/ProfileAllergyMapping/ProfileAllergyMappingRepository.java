@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface ProfileAllergyMappingRepository extends JpaRepository<ProfileAllergyMapping, Long> {
 
-    @Query(value = "SELECT allergies.allergy_name " +
-            "FROM profiles p " +
-            "JOIN profile_allergy pa ON p.id = pa.profile_id " +
+    @Query(value = "SELECT a.allergy_name " +
+            "FROM profile p " +
+            "JOIN profile_allergy_mapping pa ON p.id = pa.profile_id " +
             "JOIN allergies a ON pa.allergy_id = a.id " +
             "WHERE p.id = ?1", nativeQuery = true)
     List<String> getAllProfileAllergies(long profileId); // when allergy button is clicked on front end
