@@ -52,7 +52,15 @@ public class AllergyService {
 
     }
 
-    public List<Allergy> getBySymptoms(String symptom) {
+    public List<Allergy> getAllSymptoms() {
+        return allergyRepository
+                .findAll()
+                .stream()
+                .sorted(Comparator.comparing(Allergy::getSymptoms))
+                .collect(Collectors.toList());
+    }
+
+    public List<Allergy> getAllergyBySymptom(String symptom) {
         return allergyRepository.getAllBySymptomsContaining(symptom);
     }
 

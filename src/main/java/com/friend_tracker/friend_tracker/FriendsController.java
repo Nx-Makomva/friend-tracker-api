@@ -43,7 +43,7 @@ public class FriendsController {
 
     @PostMapping("/allergy")
     public ResponseEntity<Allergy> createAllergy(@RequestBody Allergy allergy) {
-//        allergyService.addAllergy(allergy);
+        allergyService.addAllergy(allergy);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(allergy);
     }
@@ -106,7 +106,7 @@ public class FriendsController {
     }
 
     @GetMapping("/profile{id}")
-    public ResponseEntity<Profile> getProfileById(@RequestParam long id) {
+    public ResponseEntity<Profile> getProfileById(@PathVariable long id) {
 
         return ResponseEntity.status(HttpStatus.OK).body(profileService.getProfileById(id));
     }
@@ -125,6 +125,22 @@ public class FriendsController {
 
     }
 
+    @GetMapping("/allergies/symptom")
+    public ResponseEntity<List<Allergy>> getAllergyBySymptom(@RequestParam(required = false) String symptom) {
+
+        if (symptom != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(allergyService.getAllergyBySymptom(symptom));
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(allergyService.getAllSymptoms());
+    }
+
+
+    @GetMapping("/allergy{id}")
+    public ResponseEntity<Allergy> getAllergyById(@PathVariable long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(allergyService.getAllergyById(id));
+    }
+
 
     // UPDATE
 
@@ -140,9 +156,17 @@ public class FriendsController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(newProfile);
     }
 
-
     // ALLERGIES
 
+    @PutMapping("/allergy/{id}")
+    @Transactional
+    public ResponseEntity<Allergy> updateAllergy(@RequestBody Allergy newAllergy, @PathVariable long id) {
+
+        newAllergy.setId(id);
+        allergyService.updateAllergy(newAllergy, id);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(newAllergy);
+    }
 
     // DELETE
 
@@ -157,4 +181,11 @@ public class FriendsController {
     }
 
     // ALLERGIES
+
+    @DeleteMapping("/allergy/{id}")
+    public ResponseEntity<String> deleteAllergy(@PathVariable long id) {
+        allergyService.deleteAllergy(id);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Allergy with id: " + id + " has been deleted");
+    }
 }
